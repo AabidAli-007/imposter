@@ -240,5 +240,18 @@ test('all 18 curated genres have unique IDs and distinct team/imposter words', (
     assert.equal(round.genreId, id);
     assert.notEqual(round.entry.teamWord, round.entry.imposterWord);
   }
+
+  const tamilPack = GENRE_PACKS.find((p) => p.id === 'tamil_movies');
+  assert.ok(tamilPack);
+  assert.equal(tamilPack.entries.length, 60);
+  const tamilTitles = new Set<string>();
+  for (const e of tamilPack.entries) {
+    const t = e.teamWord.trim().toLowerCase();
+    const imp = e.imposterWord.trim().toLowerCase();
+    assert.ok(!tamilTitles.has(t), `Duplicate Tamil movie title: ${e.teamWord}`);
+    assert.ok(!tamilTitles.has(imp), `Duplicate Tamil movie title: ${e.imposterWord}`);
+    tamilTitles.add(t);
+    tamilTitles.add(imp);
+  }
 });
 
