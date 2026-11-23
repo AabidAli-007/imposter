@@ -24,7 +24,7 @@ export default defineConfig(() => {
           name: 'Imposter: Secret Word',
           short_name: 'Imposter',
           description:
-            'Free offline-ready pass-and-play social deduction word game with 10 curated genres and 3 chances to catch the imposter.',
+            'Free offline-ready pass-and-play social deduction word game with 18 curated genres and 3 chances to catch the imposter.',
           theme_color: '#0F1B17',
           background_color: '#0B1210',
           display: 'standalone',

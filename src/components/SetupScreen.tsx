@@ -106,7 +106,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
             Match Setup
           </h2>
           <p className="text-sm text-[#B7B1A4]">
-            All 10 genres are 100% free and offline-ready. The team gets 3 chances to catch the imposter.
+            All {genrePacks.length} genres are 100% free and offline-ready. The team gets 3 chances to catch the imposter.
           </p>
         </div>
         <div className="font-mono-num text-xs font-medium text-[#E5A93C]">
@@ -291,7 +291,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:max-h-[470px] lg:overflow-y-auto lg:pr-1">
             {genrePacks.map((pack) => {
               const selected = config.selectedGenreIds.includes(pack.id);
               return (
@@ -300,27 +300,38 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
                   type="button"
                   aria-pressed={selected}
                   onClick={() => toggleGenre(pack.id)}
-                  className={`flex min-h-[76px] flex-col justify-between rounded-lg border p-3.5 text-left transition-colors cursor-pointer ${
+                  className={`flex min-h-[72px] flex-col justify-between rounded-lg border p-3 text-left transition-colors cursor-pointer ${
                     selected
-                      ? 'border-[#E5A93C] bg-[#1A2822]'
+                      ? pack.isMature
+                        ? 'border-[#D94F4F] bg-[#251517]'
+                        : 'border-[#E5A93C] bg-[#1A2822]'
                       : 'border-white/10 bg-[#0D1411] hover:border-white/25'
                   }`}
                 >
                   <div className="flex w-full items-start justify-between gap-2">
-                    <span className="font-display text-sm font-bold text-[#F7F4EC]">
-                      {pack.name}
-                    </span>
+                    <div className="flex items-baseline gap-2 min-w-0">
+                      <span className="font-display text-sm font-bold text-[#F7F4EC] truncate">
+                        {pack.name}
+                      </span>
+                      {pack.isMature && (
+                        <span className="text-[11px] font-bold text-[#F28482] shrink-0">
+                          Adults Only
+                        </span>
+                      )}
+                    </div>
                     <span
                       className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
                         selected
-                          ? 'border-[#E5A93C] bg-[#E5A93C] text-[#101714]'
+                          ? pack.isMature
+                            ? 'border-[#D94F4F] bg-[#D94F4F] text-white'
+                            : 'border-[#E5A93C] bg-[#E5A93C] text-[#101714]'
                           : 'border-white/20 bg-transparent text-transparent'
                       }`}
                     >
                       <Check className="h-3.5 w-3.5" aria-hidden="true" />
                     </span>
                   </div>
-                  <div className="mt-1.5 flex items-center justify-between gap-2 text-xs text-[#A9A396]">
+                  <div className="mt-1 flex items-center justify-between gap-2 text-xs text-[#A9A396]">
                     <span className="truncate">{pack.tagline}</span>
                     <span className="font-mono-num shrink-0 text-[#D8D2C5]">
                       {pack.entries.length}

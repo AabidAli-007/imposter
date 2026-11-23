@@ -68,7 +68,7 @@ export default function App() {
     playerNames: loadSavedPlayerNames(),
     imposterCount: 1,
     imposterMode: 'WORD_AND_HINT',
-    selectedGenreIds: GENRE_PACKS.map((g) => g.id),
+    selectedGenreIds: GENRE_PACKS.filter((g) => !g.isMature).map((g) => g.id),
     discussionSeconds: 90,
   }));
 

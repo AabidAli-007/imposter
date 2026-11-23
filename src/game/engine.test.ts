@@ -191,3 +191,54 @@ test('canStartRound and validateCustomWordInput enforce valid configurations', (
   assert.equal(validWord.valid, true);
   assert.equal(validWord.entry?.teamWord, 'Pizza');
 });
+
+test('all 18 curated genres have unique IDs and distinct team/imposter words', () => {
+  const expectedNewIds = [
+    'after_dark',
+    'everyday_objects',
+    'food_drinks',
+    'sports_games',
+    'tamil_movies',
+    'jobs_roles',
+    'transport',
+    'indian_holidays',
+  ];
+
+  assert.equal(GENRE_PACKS.length, 18);
+  const seenIds = new Set<string>();
+
+  for (const pack of GENRE_PACKS) {
+    assert.ok(pack.entries.length >= 26, `${pack.name} should have at least 26 entries`);
+    for (const entry of pack.entries) {
+      assert.ok(!seenIds.has(entry.id), `Duplicate entry id: ${entry.id}`);
+      seenIds.add(entry.id);
+      assert.ok(entry.teamWord.trim().length >= 2);
+      assert.ok(entry.imposterWord.trim().length >= 2);
+      assert.ok(entry.hint.trim().length >= 6);
+      assert.notEqual(
+        entry.teamWord.trim().toLowerCase(),
+        entry.imposterWord.trim().toLowerCase(),
+        `Entry ${entry.id} has matching team & imposter words`
+      );
+    }
+  }
+
+  for (const id of expectedNewIds) {
+    const round = dealNewRound(
+      {
+        playerNames: ['A', 'B', 'C', 'D'],
+        imposterCount: 1,
+        imposterMode: 'WORD_AND_HINT',
+        selectedGenreIds: [id],
+        discussionSeconds: 90,
+      },
+      GENRE_PACKS,
+      [],
+      [],
+      makeSeededRng(101)
+    );
+    assert.equal(round.genreId, id);
+    assert.notEqual(round.entry.teamWord, round.entry.imposterWord);
+  }
+});
+

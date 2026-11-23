@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Volume2, VolumeX, WifiOff, CheckCircle2 } from 'lucide-react';
+import { GENRE_PACKS, TOTAL_FREE_WORD_COUNT } from '../data/genres';
 import { PWAInstallButton } from './PWAInstallButton';
 
 interface TitleScreenProps {
@@ -121,9 +122,9 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
 
           {/* Clean unboxed metadata strip (zero-pill discipline) */}
           <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-[#A9A396]">
-            <span>10 Free Genres</span>
+            <span>{GENRE_PACKS.length} Free Genres</span>
             <span aria-hidden="true">·</span>
-            <span>260+ Word Pairs</span>
+            <span>{TOTAL_FREE_WORD_COUNT}+ Word Pairs</span>
             <span aria-hidden="true">·</span>
             <span>3-Strike Accusation Rule</span>
             <span aria-hidden="true">·</span>

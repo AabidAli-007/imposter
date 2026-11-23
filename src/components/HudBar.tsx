@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookOpen, Pause, RotateCcw, Volume2, VolumeX, WifiOff } from 'lucide-react';
+import { GENRE_PACKS } from '../data/genres';
 import type { PlayPhase } from '../game/engine';
 
 interface HudBarProps {
@@ -127,7 +128,7 @@ export const HudBar: React.FC<HudBarProps> = ({
         </div>
       ) : (
         <div className="hidden sm:block text-xs font-medium text-[#A9A396]">
-          All 10 Genres Free · 3-Chance Deduction
+          All {GENRE_PACKS.length} Genres Free · 3-Chance Deduction
         </div>
       )}
 

@@ -1,6 +1,6 @@
 {
   "name": "Imposter: Secret Word",
-  "description": "Free offline-ready pass-and-play social deduction word game with 10 curated genres, imposter hints, decoy words, and a 3-chance accusation rule.",
+  "description": "Free offline-ready pass-and-play social deduction word game with 18 curated genres, imposter hints, decoy words, and a 3-chance accusation rule.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
